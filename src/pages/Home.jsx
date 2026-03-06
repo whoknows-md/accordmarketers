@@ -9,8 +9,10 @@ import WhyGrow from "../components/WhyGrow";
 
 const Home = () => {
   return (
-    <>
-      <Hero />
+    <div>
+      <div className="pt-20">
+        <Hero />
+      </div>
       <WhyGrow />
       <Alliances />
       <About />
@@ -18,7 +20,7 @@ const Home = () => {
       <Services />
       <FAQ />
       <Footer />
-    </>
+    </div>
   );
 };
 

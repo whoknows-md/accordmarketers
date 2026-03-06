@@ -25,7 +25,7 @@ const Proposal = () => {
   }
 
   return (
-    <section className="py-20 bg-gray-50 min-h-screen">
+    <section className="pt-20 py-20 bg-gray-50 min-h-screen">
       <div className="max-w-4xl mx-auto px-6">
         {/* Page Header */}
         <div className="text-center mb-16">
