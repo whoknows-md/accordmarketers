@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/accordfavicon.png";
 import { Menu, X } from "lucide-react";
 
@@ -8,6 +8,7 @@ const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -33,13 +34,34 @@ const Navigation = () => {
     setMenuOpen(false);
   }, [location]);
 
+  // Handle section navigation from any page
+  const handleSectionClick = (sectionId) => {
+    if (location.pathname === "/") {
+      // Already on home page, scroll to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // Navigate to home and then scroll to section
+      navigate("/");
+      // Use setTimeout to ensure page loads before scrolling
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  };
+
   // 🔥 Updated nav items
   const navItems = [
     { type: "route", path: "/", label: "Home" },
-    { type: "section", path: "#about", label: "About" },
-    { type: "section", path: "#services", label: "Services" },
-    { type: "section", path: "#faq", label: "FAQ" },
-    { type: "route", path: "/blog", label: "Blog" },
+    { type: "section", id: "about", label: "About" },
+    { type: "section", id: "services", label: "Services" },
+    { type: "section", id: "faq", label: "FAQ" },
+    { type: "route", path: "/blogs", label: "Blog" },
     { type: "route", path: "/contact", label: "Contact" },
   ];
 
@@ -47,9 +69,8 @@ const Navigation = () => {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
       ${showNav ? "translate-y-0" : "-translate-y-full"}
-      ${
-        scrolled ? "bg-white/80 backdrop-blur-lg shadow-md" : "bg-transparent"
-      }`}
+      ${scrolled ? "bg-white/80 backdrop-blur-lg shadow-md" : "bg-transparent"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
@@ -64,22 +85,21 @@ const Navigation = () => {
         <ul className="hidden md:flex items-center gap-8 font-medium">
           {navItems.map((item, index) =>
             item.type === "section" ? (
-              <a
+              <button
                 key={index}
-                href={item.path}
-                className="text-gray-600 hover:text-blue-600 transition duration-300"
+                onClick={() => handleSectionClick(item.id)}
+                className="text-gray-600 hover:text-blue-600 transition duration-300 bg-none border-none cursor-pointer"
               >
                 {item.label}
-              </a>
+              </button>
             ) : (
               <NavLink
                 key={index}
                 to={item.path}
                 className={({ isActive }) =>
-                  `transition duration-300 ${
-                    isActive
-                      ? "text-blue-600 font-semibold"
-                      : "text-gray-600 hover:text-blue-600"
+                  `transition duration-300 ${isActive
+                    ? "text-blue-600 font-semibold"
+                    : "text-gray-600 hover:text-blue-600"
                   }`
                 }
               >
@@ -90,7 +110,7 @@ const Navigation = () => {
         </ul>
 
         {/* Desktop Button */}
-        <NavLink to="/contact" className="hidden md:block">
+        <NavLink to="/get-proposal" className="hidden md:block">
           <button className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-2 rounded-full shadow-md hover:scale-105 hover:shadow-lg transition-all duration-300">
             Get Proposal
           </button>
@@ -112,13 +132,13 @@ const Navigation = () => {
         <div className="flex flex-col items-start px-6 gap-6">
           {navItems.map((item, index) =>
             item.type === "section" ? (
-              <a
+              <button
                 key={index}
-                href={item.path}
-                className="text-lg text-gray-600 hover:text-blue-600"
+                onClick={() => handleSectionClick(item.id)}
+                className="text-lg text-gray-600 hover:text-blue-600 bg-none border-none cursor-pointer"
               >
                 {item.label}
-              </a>
+              </button>
             ) : (
               <NavLink
                 key={index}

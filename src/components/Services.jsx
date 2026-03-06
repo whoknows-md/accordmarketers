@@ -50,7 +50,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-28 bg-gray-50">
+    <section id="services" className="py-28 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         {/* ===== Heading ===== */}
         <div className="text-center mb-20">

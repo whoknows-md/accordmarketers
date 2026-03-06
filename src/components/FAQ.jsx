@@ -61,7 +61,7 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-28 bg-[#EDEAF3]">
+    <section id="faq" className="py-28 bg-[#EDEAF3]">
       <div className="max-w-4xl mx-auto px-6">
 
         {/* Section Title */}
