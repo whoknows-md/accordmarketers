@@ -4,26 +4,14 @@ import logo from "../assets/accordfavicon.png";
 import { Menu, X } from "lucide-react";
 
 const Navigation = () => {
-  const [showNav, setShowNav] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    let lastY = window.scrollY;
-
     const handleScroll = () => {
-      const currentY = window.scrollY;
-
-      if (currentY > lastY && currentY > 80) {
-        setShowNav(false);
-      } else {
-        setShowNav(true);
-      }
-
-      setScrolled(currentY > 50);
-      lastY = currentY;
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -68,7 +56,6 @@ const Navigation = () => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
-      ${showNav ? "translate-y-0" : "-translate-y-full"}
       ${scrolled ? "bg-white/80 backdrop-blur-lg shadow-md" : "bg-transparent"
         }`}
     >
