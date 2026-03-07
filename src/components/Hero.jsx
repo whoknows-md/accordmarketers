@@ -17,7 +17,7 @@ const Hero = () => {
               <span className="absolute inline-flex h-full w-full rounded-full bg-purple-500 opacity-75 animate-ping"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-600"></span>
             </span>{" "}
-            NEXT-GEN MARKETING
+            AI based DIGITAL MARKETING
           </motion.div>
 
           {/* Heading Zigzag Animation */}
