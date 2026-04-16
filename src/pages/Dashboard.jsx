@@ -1,29 +1,3 @@
-// const Dashboard = ({ setIsAdminLoggedIn }) => {
-//   const logout = async () => {
-//     await fetch("http://localhost:5000/api/auth/logout", {
-//       method: "POST",
-//       credentials: "include"
-//     });
-
-//     // 🔥 Show navbar + go back to login
-//     setIsAdminLoggedIn(false);
-//     window.location.reload(); // optional but clean reset
-//   };
-
-//   return (
-//     <div style={{ padding: "20px" }}>
-//       <h1>Admin Dashboard 🔥</h1>
-//       <p>Welcome bro 😎</p>
-
-//       <button onClick={logout} style={{ marginTop: "20px" }}>
-//         Logout
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
 import React from "react";
 
 const Dashboard = ({
@@ -37,7 +11,7 @@ const Dashboard = ({
   setSelectedMessage,
   formatDate,
   isDark,
-  stats
+  stats,
 }) => {
   return (
     <>
@@ -47,9 +21,7 @@ const Dashboard = ({
           <div
             key={k}
             className={`p-4 rounded-xl shadow ${
-              isDark
-                ? "bg-gray-800 text-white"
-                : "bg-white text-black"
+              isDark ? "bg-gray-800 text-white" : "bg-white text-black"
             }`}
           >
             <p className="text-sm capitalize text-gray-400">{k}</p>
@@ -66,7 +38,6 @@ const Dashboard = ({
       >
         <div className="overflow-x-auto">
           <table className="w-full table-auto text-left">
-
             {/* HEADER */}
             <thead
               className={`border-b text-xs md:text-sm ${
@@ -96,9 +67,7 @@ const Dashboard = ({
                   <tr
                     key={c.id}
                     className={`border-b ${
-                      isDark
-                        ? "hover:bg-gray-700"
-                        : "hover:bg-gray-50"
+                      isDark ? "hover:bg-gray-700" : "hover:bg-gray-50"
                     }`}
                   >
                     <td className="p-3 text-xs md:text-sm">
@@ -107,15 +76,11 @@ const Dashboard = ({
 
                     <td className="p-3 font-medium">{c.name}</td>
 
-                    <td className="p-3 break-words max-w-[120px]">
-                      {c.email}
-                    </td>
+                    <td className="p-3 break-words max-w-[120px]">{c.email}</td>
 
                     <td className="p-3">{c.phone}</td>
 
-                    <td className="p-3 hidden md:table-cell">
-                      {c.company}
-                    </td>
+                    <td className="p-3 hidden md:table-cell">{c.company}</td>
 
                     {/* MESSAGE */}
                     <td className="p-3">
@@ -129,21 +94,15 @@ const Dashboard = ({
                       </button>
                     </td>
 
-                    <td className="p-3 hidden md:table-cell">
-                      {date}
-                    </td>
+                    <td className="p-3 hidden md:table-cell">{date}</td>
 
-                    <td className="p-3 hidden md:table-cell">
-                      {time}
-                    </td>
+                    <td className="p-3 hidden md:table-cell">{time}</td>
 
                     {/* STATUS */}
                     <td className="p-3">
                       <select
                         value={c.status || "new"}
-                        onChange={(e) =>
-                          updateStatus(c.id, e.target.value)
-                        }
+                        onChange={(e) => updateStatus(c.id, e.target.value)}
                         className={`px-2 py-1 rounded text-sm ${
                           isDark
                             ? "bg-gray-700 text-white border-gray-600"
@@ -170,18 +129,14 @@ const Dashboard = ({
                 );
               })}
             </tbody>
-
           </table>
         </div>
 
         {/* PAGINATION */}
         <div className="flex justify-center mt-6 gap-2 items-center flex-wrap">
-
           {/* PREV */}
           <button
-            onClick={() =>
-              setCurrentPage((p) => Math.max(p - 1, 1))
-            }
+            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             className="px-3 py-1 rounded bg-gray-600 text-white text-sm"
           >
             Prev
@@ -218,7 +173,13 @@ const Dashboard = ({
                 </>
               )}
 
-              {[currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2]
+              {[
+                currentPage - 2,
+                currentPage - 1,
+                currentPage,
+                currentPage + 1,
+                currentPage + 2,
+              ]
                 .filter((p) => p > 0 && p <= totalPages)
                 .map((page) => (
                   <button
@@ -250,33 +211,23 @@ const Dashboard = ({
 
           {/* NEXT */}
           <button
-            onClick={() =>
-              setCurrentPage((p) =>
-                Math.min(p + 1, totalPages)
-              )
-            }
+            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             className="px-3 py-1 rounded bg-gray-600 text-white text-sm"
           >
             Next
           </button>
-
         </div>
       </div>
 
       {/* MESSAGE POPUP */}
       {selectedMessage && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center px-4">
-
           <div
             className={`w-full max-w-md max-h-[80vh] overflow-y-auto p-4 sm:p-6 rounded-2xl shadow-xl ${
-              isDark
-                ? "bg-gray-800 text-white"
-                : "bg-white text-black"
+              isDark ? "bg-gray-800 text-white" : "bg-white text-black"
             }`}
           >
-            <h2 className="font-bold mb-3 text-base sm:text-lg">
-              Message
-            </h2>
+            <h2 className="font-bold mb-3 text-base sm:text-lg">Message</h2>
 
             <p className="text-sm leading-relaxed break-words">
               {selectedMessage}
@@ -289,7 +240,6 @@ const Dashboard = ({
               Close
             </button>
           </div>
-
         </div>
       )}
     </>
